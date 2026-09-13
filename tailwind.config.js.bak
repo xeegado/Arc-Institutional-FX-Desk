@@ -1,0 +1,41 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ['./index.html', './src/**/*.{js,jsx}'],
+  theme: {
+    extend: {
+      colors: {
+        arc: {
+          bg: '#070A10',                                    // deep blue-black canvas
+          card: '#0D1119',                                  // card base
+          panel: '#121826',                                 // elevated surfaces
+          border: 'rgba(148, 163, 184, 0.09)',              // hairline borders
+          borderBright: 'rgba(148, 163, 184, 0.18)',
+          accent: '#5B8CFF',                                // refined institutional blue
+          accentSoft: 'rgba(91, 140, 255, 0.10)',
+          green: '#3DDC97',
+          red: '#F87171',
+          amber: '#FBBF24',
+          textBright: '#F2F5FA',
+          text: '#C4CDDB',
+          textMuted: '#76829A',
+        },
+      },
+      fontFamily: {
+        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+      },
+      boxShadow: {
+        panel: 'inset 0 1px 0 rgba(255,255,255,0.03), 0 12px 32px -16px rgba(0,0,0,0.55)',
+        'panel-hover': 'inset 0 1px 0 rgba(255,255,255,0.05), 0 16px 40px -16px rgba(0,0,0,0.65)',
+        glow: '0 0 32px -8px rgba(91,140,255,0.35)',
+      },
+      borderRadius: {
+        card: '14px',
+      },
+      transitionTimingFunction: {
+        smooth: 'cubic-bezier(0.22, 1, 0.36, 1)',
+      },
+    },
+  },
+  plugins: [],
+};
