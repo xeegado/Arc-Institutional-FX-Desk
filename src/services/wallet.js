@@ -50,6 +50,41 @@ function getEip1193Provider() {
 // --- Connection -----------------------------------------------------------
 
 /**
+ * Restores an already-authorized wallet connection without opening
+ * MetaMask's connection popup.
+ *
+ * This is used after a page refresh.
+ *
+ * @returns {Promise<{ address: string, chainId: number } | null>}
+ */
+export async function restoreWalletConnection() {
+  const injected = getEip1193Provider();
+
+  browserProvider = new BrowserProvider(injected);
+
+  const accounts = await browserProvider.send("eth_accounts", []);
+
+  console.log("[Wallet Restore] eth_accounts returned:", accounts);
+
+  if (!accounts || accounts.length === 0) {
+    console.log("[Wallet Restore] No authorized account found");
+
+    browserProvider = null;
+    return null;
+  }
+
+  const network = await browserProvider.getNetwork();
+
+  console.log("[Wallet Restore] Restoring account:", accounts[0]);
+  console.log("[Wallet Restore] Chain ID:", Number(network.chainId));
+
+  return {
+    address: accounts[0],
+    chainId: Number(network.chainId),
+  };
+}
+
+/**
  * Prompts the wallet's connect UI and returns the connected address.
  * Does NOT switch networks — call ensureArcTestnet() separately so the
  * caller can decide when/how to prompt for a network switch.
